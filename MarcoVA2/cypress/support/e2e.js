@@ -1,5 +1,9 @@
 import './commands';
 
+beforeEach(() => {
+  cy.clearCookies();
+  cy.clearLocalStorage();
+});
 
 Cypress.on('uncaught:exception', (err, runnable) => {
   if (err.message.includes('await is only valid in async functions')) {
@@ -7,7 +11,7 @@ Cypress.on('uncaught:exception', (err, runnable) => {
       name: 'Uncaught Exception',
       message: 'Ignorando erro de SyntaxError "await" vindo do código da aplicação.',
     });
-    return false; 
+    return false;
   }
   return true;
 });

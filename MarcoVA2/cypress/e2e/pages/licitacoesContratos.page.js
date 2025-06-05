@@ -1,14 +1,14 @@
 class LicitacoesContratosPage {
   getTituloPagina() {
-
-    return cy.get('#main-content').find('h2').first();
+    // CORRIGIDO: Agora ele procura por uma tag <h2> que contenha
+    // o texto exato "Licitações", conforme a imagem que você enviou.
+    return cy.contains('h2', 'Licitações');
   }
 
   verificarTituloPagina(tituloEsperado) {
-   
-    this.getTituloPagina({ timeout: 10000 })
-      .should('be.visible')                 
-      .and('contain.text', tituloEsperado); 
+    // Este método não precisa de alteração.
+    // Ele vai receber 'Licitações' do seu step e vai funcionar corretamente.
+    this.getTituloPagina().should('be.visible').and('contain.text', tituloEsperado);
   }
 }
 

@@ -1,4 +1,4 @@
-import { Given, When, Then, And } from '@badeball/cypress-cucumber-preprocessor';
+import { Given, When, Then } from '@badeball/cypress-cucumber-preprocessor';
 import homePortalPage from '../pages/homePortal.page';
 import despesasPublicasPage from '../pages/despesasPublicas.page';
 import licitacoesContratosPage from '../pages/licitacoesContratos.page';
@@ -6,10 +6,9 @@ import licitacoesContratosPage from '../pages/licitacoesContratos.page';
 Given('que o usuário está na página inicial do Portal da Transparência', () => {
   homePortalPage.visit();
 
-
   cy.get('body', { timeout: 10000 }).then($body => {
     const rejectCookieButtonText = 'Rejeitar cookies opcionais';
-  
+
     const $rejectCookieButton = $body.find(`button:contains("${rejectCookieButtonText}")`);
     if ($rejectCookieButton.length > 0 && $rejectCookieButton.is(':visible')) {
       cy.log(`Banner de cookies: Botão "${rejectCookieButtonText}" encontrado. Clicando.`);
@@ -38,7 +37,6 @@ Given('que o usuário está na página inicial do Portal da Transparência', () 
   });
 });
 
-
 When('ele navega para a seção de "Despesas Públicas"', () => {
   homePortalPage.navegarParaDespesasPublicas();
 });
@@ -48,18 +46,15 @@ Then('a página de "Despesas Públicas" deve ser exibida com o título correto',
   cy.url().should('include', '/despesas/visao-geral');
 });
 
-And('uma área para consulta de despesas deve estar visível', () => {
+Then('uma área para consulta de despesas deve estar visível', () => {
   despesasPublicasPage.verificarAreaConsultaDespesasVisivel();
 });
 
-
-
-When('ele navega para a seção de "Licitações e Contratos"', () => {
+When('ele navega para a seção de "Licitações Públicas"', () => {
   homePortalPage.navegarParaLicitacoesContratos();
 });
 
-Then('a página de "Licitações e Contratos" deve ser exibida com o título correto', () => {
-
-  licitacoesContratosPage.verificarTituloPagina('Licitações e Contratos');
-  cy.url().should('include', 'licitacoes-contratos');
+Then('a página de "Licitações Públicas" deve ser exibida com o título correto', () => {
+  licitacoesContratosPage.verificarTituloPagina('Licitações');
+  cy.url().should('include', 'licitacoes/visao-geral');
 });
