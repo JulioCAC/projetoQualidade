@@ -54,7 +54,7 @@ When('ele navega para a seção de "Licitações Públicas"', () => {
   homePortalPage.navegarParaLicitacoesContratos();
 });
 
-Then('a página de "Licitações Públicas" deve ser exibida com o título correto', () => {
+Then('a página de "Licitações" deve ser exibida com o título correto', () => {
   licitacoesContratosPage.verificarTituloPagina('Licitações');
   cy.url().should('include', 'licitacoes/visao-geral');
 });
